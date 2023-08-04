@@ -1,1 +1,6 @@
-
+jobs:
+  include:
+    stage: deploy
+    script:
+      - ls -la
+      - scp index.html poman@35.226.145.248:/var/www/html
