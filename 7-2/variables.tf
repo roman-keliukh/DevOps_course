@@ -3,12 +3,6 @@ variable "region" {
   default     = "us-east-1"
 }
 
-variable "ingress_ports" {
-  type        = list(any)
-  description = "allowed incoming ports"
-  default     = ["80", "22", "443", "3000"]
-}
-
 variable "instance_type" {
   description = "instance type"
   default     = "t2.micro"
