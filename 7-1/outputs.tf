@@ -14,8 +14,8 @@ output "private_ips" {
 
 output "instance_ids" {
   value = {
-    first_instance_public_ip  = aws_instance.HW_first_instance.id
-    second_instance_public_ip = aws_instance.HW_second_instance.id
+    first_instance_public_id  = aws_instance.HW_first_instance.id
+    second_instance_public_id = aws_instance.HW_second_instance.id
   }
 }
 
