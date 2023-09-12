@@ -1,0 +1,40 @@
+# templates/postgresql.yaml
+apiVersion: v1
+kind: {{ .Values.postgresql.kind}}
+metadata:
+  name: {{ .Values.postgresql.name }}
+spec:
+  selector:
+    app: {{ .Values.postgresql.name }}
+  ports:
+    - protocol: TCP
+      port: {{ .Values.postgresql.port }}
+
+---
+apiVersion: {{ .Values.apiVersion }}
+kind: {{ .Release.kind }}
+metadata:
+  name: {{ .Values.postgresql.name }}
+spec:
+  replicas: {{ .Values.postgresql.replicas }}
+  selector:
+    matchLabels:
+      app:  {{ .Values.postgresql.name }}
+  template:
+    metadata:
+      labels:
+        app:  {{ .Values.postgresql.name }}
+    spec:
+      containers:
+        - name:  {{ .Values.postgresql.name }}
+          image: {{ .Values.postgresql.image }}
+          env:
+            - name: POSTGRES_USER
+              value: {{ .Values.postgresql.postgresUser }}
+            - name: POSTGRES_PASSWORD
+              value: {{ .Values.postgresql.postgresPassword }}
+            - name: POSTGRES_DB
+              value: {{ .Values.postgresql.postgresDatabase }}
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgres-data

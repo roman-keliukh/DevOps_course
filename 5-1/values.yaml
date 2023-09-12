@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+
+backend:
+  image: romankeliukh/backend
+  env: production
+  name: backend
+  replicas: 2
+  containerPort: 3000
+
+frontend:
+  image: romankeliukh/frontend
+  env: production
+  name: frontend
+  replicas: 1
+  containerPort: 80
+
+postgresql:
+  image: postgres
+  postgresUser: postgres
+  postgresPassword: password
+  postgresDatabase: mydb
+  kind: Service
+  name: postgres
+  port: 5432
+  replicas: 1
