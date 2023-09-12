@@ -1,0 +1,5 @@
+apiVersion: v2
+name: HW5_1
+kind: Deployment
+description: HomeWork_5-1, Helm for front, back and db
+version: 0.1.0

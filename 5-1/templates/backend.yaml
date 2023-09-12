@@ -1,0 +1,41 @@
+apiVersion: {{ .Values.apiVersion }}
+kind: {{ .Release.kind }}
+metadata:
+  name: {{ .Values.backend.name }}
+  labels:
+    env: {{ .Values.backend.env}}
+spec:
+  replicas: {{ .Values.backend.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.backend.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.backend.name }}
+    spec:
+      containers:
+        - name: {{ .Values.backend.name }}
+          image: {{ .Values.backend.image }}
+          ports:
+            - containerPort: {{ .Values.backend.containerPort }}
+          volumeMounts:
+            - mountPath: /app
+              name: backend-volume
+      volumes:
+        - name: backend-volume
+          hostPath:
+            path: /app
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+spec:
+  selector:
+    app: backend
+  ports:
+    - protocol: TCP
+      port: 3000
