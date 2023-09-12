@@ -1,6 +1,6 @@
 # templates/postgresql.yaml
 apiVersion: v1
-kind: {{ .Values.postgresql.kind}}
+kind: {{ .Values.kind}}
 metadata:
   name: {{ .Values.postgresql.name }}
 spec:

@@ -1,3 +1,15 @@
+apiVersion: v1
+kind: {{ .Values.kind}}
+metadata:
+  name: {{ .Values.frontend.name }}
+spec:
+  selector:
+    app: {{ .Values.frontend.name }}
+  ports:
+    - protocol: {{ .Values.protocol }}
+      port: {{ .Values.frontend.containerPort }}
+
+---
 apiVersion: {{ .Values.apiVersion }}
 kind: {{ .Release.kind }}
 metadata:
@@ -25,16 +37,3 @@ spec:
         - name: frontend-volume
           hostPath:
             path: /usr/share/nginx/html
-
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: frontend
-spec:
-  selector:
-    app: frontend
-  ports:
-    - protocol: TCP
-      port: 80
