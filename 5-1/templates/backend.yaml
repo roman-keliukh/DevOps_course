@@ -1,3 +1,15 @@
+apiVersion: v1
+kind: {{ .Values.kind}}
+metadata:
+  name: {{ .Values.backend.name }}
+spec:
+  selector:
+    app: {{ .Values.backend.name }}
+  ports:
+    - protocol: {{ .Values.protocol }}
+      port: {{ .Values.backend.containerPort }}
+
+---
 apiVersion: {{ .Values.apiVersion }}
 kind: {{ .Release.kind }}
 metadata:
@@ -27,15 +39,3 @@ spec:
           hostPath:
             path: /app
 
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: backend
-spec:
-  selector:
-    app: backend
-  ports:
-    - protocol: TCP
-      port: 3000

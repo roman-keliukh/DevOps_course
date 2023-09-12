@@ -1,4 +1,6 @@
 apiVersion: apps/v1
+kind: Service
+protocol: TCP
 
 backend:
   image: romankeliukh/backend
@@ -19,7 +21,6 @@ postgresql:
   postgresUser: postgres
   postgresPassword: password
   postgresDatabase: mydb
-  kind: Service
   name: postgres
   port: 5432
   replicas: 1
